@@ -49,9 +49,8 @@ HEADERS  += \
 
 FORMS    +=
 
-SOILPATH = "lib/Simple OpenGL Image Library"
-INCLUDEPATH += "../src/lib/GLEW/src" "../src/lib/Simple OpenGL Image Library/src" "../src/lib/VRPN/src"
-LIBS += -L"../src/lib/GLEW/lib" -L"../src/lib/Simple OpenGL Image Library/lib" -L"../src/lib/VRPN/lib" -lSOIL -lglew32s -lopengl32
+INCLUDEPATH += "../src/lib/GLEW/src" "../src/lib/VRPN/src"
+LIBS += -L"../src/lib/GLEW/lib" -L"../src/lib/VRPN/lib" -lglew32s -lopengl32
 
 QMAKE_CXXFLAGS += -std=c++11
 

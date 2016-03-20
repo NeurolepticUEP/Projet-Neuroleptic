@@ -16,7 +16,7 @@ Mesh::Mesh(std::string &id, GLfloat *vertices, int length): Bindable(id) {
 
     glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, length * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, length * sizeof(GLfloat) * 11, vertices, GL_STATIC_DRAW);
 
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11*sizeof(GLfloat), (GLvoid*) 0);
         glEnableVertexAttribArray(0);

@@ -27,6 +27,7 @@ void World::initialize() {
                                45.0f, this->window_->width(), this->window_->height()
                               );
 
+
     SceneGraph *scene = new SceneGraph();
     glm::mat4 mat(1.0f);
     std::string name("test"), mesh("cube_mesh");

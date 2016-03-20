@@ -7,8 +7,6 @@
 
 Engine_Graphic::Engine_Graphic(World *world)
     : Engine_Abstract(world) {
-
-    this->initializeOpenGLFunctions();
 }
 
 Engine_Graphic::~Engine_Graphic() {
@@ -16,9 +14,10 @@ Engine_Graphic::~Engine_Graphic() {
 }
 
 void Engine_Graphic::initialize() {
+    this->initializeOpenGLFunctions();
+
     int width = this->world_->getWindow()->width();
     int height = this->world_->getWindow()->height();
-
 
     glViewport(0, 0, width, height);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);

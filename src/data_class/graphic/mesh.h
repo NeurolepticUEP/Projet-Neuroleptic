@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "gl_include.h"
+#include "../../gl_include.h"
 #include "bindable.h"
 
 class Mesh : protected QOpenGLFunctions_3_3_Core, public Bindable {

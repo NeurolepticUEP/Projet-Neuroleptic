@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "gl_include.h"
+#include "../gl_include.h"
 
 class Instance {
 public:

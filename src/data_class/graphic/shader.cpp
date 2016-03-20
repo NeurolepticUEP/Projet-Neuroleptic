@@ -25,8 +25,8 @@ GLboolean Shader::loadShader(std::string vertexPath, std::string fragmentPath) {
     fragmentFile.exceptions(std::ifstream::badbit);
 
     try {
-        vertexFile.open(vertexPath);
-        fragmentFile.open(fragmentPath);
+        vertexFile.open(vertexPath.c_str());
+        fragmentFile.open(fragmentPath.c_str());
 
         std::stringstream vertexStream;
         std::stringstream fragmentStream;

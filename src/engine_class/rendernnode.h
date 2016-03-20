@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "gl_include.h"
+#include "../gl_include.h"
 
 #include "../data_class/state.h"
 #include "../data_class/scenegraph.h"

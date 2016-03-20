@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "gl_include.h"
+#include "../../gl_include.h"
 
 enum Camera_Mode {
     MODE_FPS, MODE_TRACKBALL_H, MODE_TRACKBALL_3D

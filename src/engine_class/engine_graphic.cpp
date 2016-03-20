@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "gl_include.h"
+#include "../gl_include.h"
 #include "world.h"
 
 Engine_Graphic::Engine_Graphic(World *world)

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "gl_include.h"
+#include "../../gl_include.h"
 
 class Shader : protected QOpenGLFunctions_3_3_Core {
 public:

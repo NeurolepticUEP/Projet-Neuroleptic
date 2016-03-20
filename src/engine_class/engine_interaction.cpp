@@ -1,8 +1,10 @@
 #include "engine_interaction.h"
 
 #include <iostream>
-#include <vrpn_Text.h>
-#include <vrpn_Connection.h>
+
+
+#include "vrpn_Text.h"
+#include "vrpn_Connection.h"
 
 #include "world.h"
 

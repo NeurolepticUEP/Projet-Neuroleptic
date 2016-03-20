@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-#include "window.h"
+#include "../window.h"
 #include "../data_class/graphic/camera.h"
 #include "../data_class/instance.h"
 #include "../data_class/scenegraph.h"

@@ -47,8 +47,13 @@ HEADERS  += \
 
 FORMS    +=
 
+<<<<<<< HEAD
 INCLUDEPATH += "./lib/GLEW/src" "./lib/VRPN/src"
 LIBS += -L"./lib/VRPN/lib" -lopengl32 -lvrpn
+=======
+INCLUDEPATH += "../src/lib/GLEW/src" "../src/lib/VRPN/src"
+LIBS += -L"../src/lib/GLEW/lib" -L"../src/lib/VRPN/lib" -lglew32s -lopengl32
+>>>>>>> origin/master
 
 QMAKE_CXXFLAGS += -std=c++11
 

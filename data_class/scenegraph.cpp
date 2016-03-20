@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "graphic/texture.h"
 #include "graphic/mesh.h"
 #include "instance_vector.h"
 
@@ -31,12 +30,12 @@ bool SceneGraph::addInstance(Instance *i, std::string mesh_id) {
         return false;
     }
 
-    i_vec->push_back(i);
+    i_vec->addInstance(i);
     return true;
 }
 
 void SceneGraph::loadCubeData() {
     Mesh *mesh = Data_Maker::createCubeMesh();
 
-    (*this->mesh_graph_)[mesh] = new Instance_Vector;
+    (*this->mesh_graph_)[mesh] = new Instance_Vector(36);
 }

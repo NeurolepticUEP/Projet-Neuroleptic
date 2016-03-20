@@ -25,13 +25,6 @@ Window::Window() {
 Window::~Window() {  }
 
 void Window::initializeGL() {
-
-    glewExperimental = GL_TRUE;
-    GLenum err = glewInit();
-    if(err != GLEW_OK) {
-        std::cout << glewGetErrorString(err) << std::endl;
-    }
-
     this->world_->initialize();
 }
 

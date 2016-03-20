@@ -5,6 +5,8 @@
 
 RenderNode::RenderNode() {
     this->shader_ = new Shader("../src/display.vert", "../src/display.frag");
+
+    this->initializeOpenGLFunctions();
 }
 
 RenderNode::~RenderNode() {

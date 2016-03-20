@@ -7,6 +7,7 @@
 #include "shader.h"
 
 Shader::Shader(std::string vertexshader, std::string fragmentshader) {
+    this->initializeOpenGLFunctions();
     this->loadShader(vertexshader, fragmentshader);
 }
 

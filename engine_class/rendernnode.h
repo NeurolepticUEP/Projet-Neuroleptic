@@ -11,7 +11,7 @@
 #include "../data_class/graphic/camera.h"
 
 
-class RenderNode {
+class RenderNode : protected QOpenGLFunctions_3_3_Core {
 public:
     RenderNode();
     ~RenderNode();

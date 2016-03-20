@@ -7,6 +7,8 @@
 
 Engine_Graphic::Engine_Graphic(World *world)
     : Engine_Abstract(world) {
+
+    this->initializeOpenGLFunctions();
 }
 
 Engine_Graphic::~Engine_Graphic() {

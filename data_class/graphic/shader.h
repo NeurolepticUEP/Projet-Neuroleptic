@@ -6,7 +6,7 @@
 
 #include "gl_include.h"
 
-class Shader {
+class Shader : protected QOpenGLFunctions_3_3_Core {
 public:
     Shader(std::string vertexshader, std::string fragmentshader);
     virtual ~Shader();

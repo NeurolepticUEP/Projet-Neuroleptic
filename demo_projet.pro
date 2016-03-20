@@ -22,8 +22,7 @@ SOURCES += main.cpp\
     engine_class/world.cpp \
     data_class/graphic/camera.cpp \
     data_class/graphic/mesh.cpp \
-    data_class/graphic/shader.cpp \
-    data_class/graphic/texture.cpp
+    data_class/graphic/shader.cpp
 
 HEADERS  += \
     gl_include.h \
@@ -40,7 +39,6 @@ HEADERS  += \
     data_class/graphic/camera.h \
     data_class/graphic/mesh.h \
     data_class/graphic/shader.h \
-    data_class/graphic/texture.h \
     data_class/world_data.h \
     data_class/state.h \
     data_class/instance_vector.h \
@@ -49,9 +47,8 @@ HEADERS  += \
 
 FORMS    +=
 
-SOILPATH = "lib/Simple OpenGL Image Library"
-INCLUDEPATH += "../src/lib/GLEW/src" "../src/lib/Simple OpenGL Image Library/src" "../src/lib/VRPN/src"
-LIBS += -L"../src/lib/GLEW/lib" -L"../src/lib/Simple OpenGL Image Library/lib" -L"../src/lib/VRPN/lib" -lSOIL -lglew32s -lopengl32
+INCLUDEPATH += "./lib/GLEW/src" "./lib/VRPN/src"
+LIBS += -L"./lib/VRPN/lib" -lopengl32 -lvrpn
 
 QMAKE_CXXFLAGS += -std=c++11
 

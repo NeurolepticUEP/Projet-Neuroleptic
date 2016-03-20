@@ -4,7 +4,7 @@
 #include <string>
 
 RenderNode::RenderNode() {
-    this->shader_ = new Shader("../src/display.vert", "../src/display.frag");
+    this->shader_ = new Shader("./display.vert", "./display.frag");
 
     this->initializeOpenGLFunctions();
 }

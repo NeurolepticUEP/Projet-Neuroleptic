@@ -31,12 +31,16 @@ void World::initialize() {
     SceneGraph *scene = new SceneGraph();
     glm::mat4 mat(1.0f);
     std::string name("test"), mesh("cube_mesh");
+
     Instance *inst = new Instance(name, mat);
-
     scene->addInstance(inst, mesh);
-
     this->data_ = new World_Data(camera, scene);
-    this->data_->addBodyPart(inst, 0);
+    this->data_->addBodyPart(inst, 8);
+
+    inst = new Instance(name, mat);
+    scene->addInstance(inst, mesh);
+    this->data_ = new World_Data(camera, scene);
+    this->data_->addBodyPart(inst, 8);
 }
 
 void World::update() {

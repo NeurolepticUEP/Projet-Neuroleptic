@@ -11,25 +11,32 @@
 
 
 Engine_Interaction::~Engine_Interaction() {
-    delete this->sintracker_;
     delete this->vrpnTracker;
 }
 
-/*void trackerEventHandler(void* userData, const vrpn_TRACKERCB t) {
+void VRPN_CALLBACK trackerEventHandler_Left(void* userData, const vrpn_TRACKERCB t) {
     Engine_Interaction *i = (Engine_Interaction*)userData;
 
-    Instance *in = i->getMovableInstance()[0];
+    Instance *in = i->getWorld()->getData()->getBodyPart(8);
     glm::mat4 mat = glm::translate(in->getOWMatrix(), glm::vec3(t.pos[0]*0.001, t.pos[1], t.pos[2]));
 
     in->setOWMatrix(mat);
-}*/
+}
 
-Engine_Interaction::Engine_Interaction(World *world):
-    Engine_Abstract(world) {
-    //vrpn_Connection_IP* m_Connection = new vrpn_Connection_IP(1250);
-    //this->sintracker_ = new SinTracker(m_Connection);
-    //this->vrpnTracker= new vrpn_Tracker_Remote("sinTracker0@localhost", m_Connection);
-    //vrpnTracker->register_change_handler( this, trackerEventHandler);
+void VRPN_CALLBACK trackerEventHandler_Right(void* userData, const vrpn_TRACKERCB t) {
+    Engine_Interaction *i = (Engine_Interaction*)userData;
+
+    Instance *in = i->getWorld()->getData()->getBodyPart(14);
+    glm::mat4 mat = glm::translate(in->getOWMatrix(), glm::vec3(t.pos[0]*0.001, t.pos[1], t.pos[2]));
+
+    in->setOWMatrix(mat);
+}
+
+Engine_Interaction::Engine_Interaction(World *world): Engine_Abstract(world) {
+    this->vrpnTracker= new vrpn_Tracker_Remote("Tracker0@localhost");
+
+    vrpnTracker->register_change_handler( this, trackerEventHandler_Right, 14);
+    vrpnTracker->register_change_handler( this, trackerEventHandler_Left, 8);
 }
 
 
@@ -53,7 +60,6 @@ void Engine_Interaction::initialize() {
 
 void Engine_Interaction::update(World_Data *data) {
 
-    //Pour le moment l'objet tourne yay!
     QCursor e = this->world_->getWindow()->cursor();
     int width = this->world_->getWindow()->width();
     int height = this->world_->getWindow()->height();
@@ -63,10 +69,8 @@ void Engine_Interaction::update(World_Data *data) {
     float diffX = (e.pos().rx() - width/2 - x) * 0.001;
     float diffY = (e.pos().ry() - height/2 - y) * 0.001;
 
+    //data->getCamera()->rotateAroundUp(diffX);
+    //data->getCamera()->rotateAroundRight(diffY);
 
-    data->getCamera()->rotateAroundUp(diffX);
-    data->getCamera()->rotateAroundRight(diffY);
-
-    //this->sintracker_->mainloop();
-    //this->vrpnTracker->mainloop();
+    this->vrpnTracker->mainloop();
 }

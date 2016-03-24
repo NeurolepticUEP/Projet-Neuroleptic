@@ -49,13 +49,13 @@ FORMS    +=
 
 
 INCLUDEPATH += $${PWD}/lib/VRPN/src
-LIBS += -L$${PWD}/lib/VRPN/ -lopengl32 -lvrpn
+LIBS += -L$${PWD}/lib/VRPN/ -lopengl32 -lvrpn -lws2_32
 
 
 QMAKE_CXXFLAGS += -std=c++11
 
 OTHER_FILES += \
-    display.frag \
-    display.vert
+    shader/display.frag \
+    shader/display.vert
 
 DISTFILES +=

@@ -9,8 +9,6 @@
 
 #include "vrpn_Tracker.h"
 
-#include "../sintracker.h"
-
 class Window;
 
 class Engine_Interaction : public Engine_Abstract {
@@ -24,7 +22,6 @@ public:
     virtual void update(World_Data* data);
 
 private:
-    SinTracker *sintracker_;
     vrpn_Tracker_Remote* vrpnTracker;
 };
 

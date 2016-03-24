@@ -1,4 +1,4 @@
-/*#include "debug/sintracker.h"
+#include "sintracker.h"
 
 #include <iostream>
 #include <math.h>
@@ -46,4 +46,4 @@ void SinTracker::mainloop() {
     }
 
     server_mainloop();
-}*/
+}

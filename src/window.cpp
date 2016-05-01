@@ -22,7 +22,9 @@ Window::Window() {
 
 }
 
-Window::~Window() {  }
+Window::~Window() {
+    delete this->world_;
+}
 
 void Window::initializeGL() {
     this->world_->initialize();

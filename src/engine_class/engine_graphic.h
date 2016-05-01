@@ -13,7 +13,7 @@ class Window;
 class Engine_Graphic : protected QOpenGLFunctions_3_3_Core, public Engine_Abstract {
 public:
     Engine_Graphic(World *world);
-    ~Engine_Graphic();
+    virtual ~Engine_Graphic();
 
     virtual void initialize();
     virtual void update(World_Data* data);

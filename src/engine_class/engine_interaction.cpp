@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-
 #include "vrpn_Text.h"
 #include "vrpn_Connection.h"
 
@@ -14,25 +13,34 @@ Engine_Interaction::~Engine_Interaction() {
     delete this->vrpnTracker;
 }
 
-void VRPN_CALLBACK trackerEventHandler_Left(void* userData, const vrpn_TRACKERCB t) {
-    Engine_Interaction *i = (Engine_Interaction*)userData;
-
-    Instance *in = i->getWorld()->getData()->getBodyPart(8);
-    glm::mat4 mat = glm::translate(in->getOWMatrix(), glm::vec3(t.pos[0]*0.001, t.pos[1], t.pos[2]));
-
-    in->setOWMatrix(mat);
-}
-
 void VRPN_CALLBACK trackerEventHandler_Right(void* userData, const vrpn_TRACKERCB t) {
     Engine_Interaction *i = (Engine_Interaction*)userData;
 
     Instance *in = i->getWorld()->getData()->getBodyPart(14);
-    glm::mat4 mat = glm::translate(in->getOWMatrix(), glm::vec3(t.pos[0]*0.001, t.pos[1], t.pos[2]));
 
-    in->setOWMatrix(mat);
+    if(in != nullptr) {
+        glm::mat4 mat = glm::translate(glm::mat4(1.0f), glm::vec3(t.pos[0] * -3.0f, t.pos[1] * 2.5f, t.pos[2]));
+        mat = glm::rotate(mat, (float)t.quat[3], glm::vec3(t.quat[0], t.quat[1], t.quat[2]));
+        in->setOWMatrix(mat);
+    }
+
 }
 
-Engine_Interaction::Engine_Interaction(World *world): Engine_Abstract(world) {
+void VRPN_CALLBACK trackerEventHandler_Left(void* userData, const vrpn_TRACKERCB t) {
+    Engine_Interaction *i = (Engine_Interaction*)userData;
+
+    Instance *in = i->getWorld()->getData()->getBodyPart(8);
+
+    if(in != nullptr) {
+        glm::mat4 mat = glm::translate(glm::mat4(1.0f), glm::vec3(t.pos[0] * -3.0f, t.pos[1] * 2.5f, t.pos[2]));
+        mat = glm::rotate(mat, (float)t.quat[3], glm::vec3(t.quat[0], t.quat[1], t.quat[2]));
+        in->setOWMatrix(mat);
+    }
+
+}
+
+Engine_Interaction::Engine_Interaction(World *world):
+    Engine_Abstract(world) {
     this->vrpnTracker= new vrpn_Tracker_Remote("Tracker0@localhost");
 
     vrpnTracker->register_change_handler( this, trackerEventHandler_Right, 14);
@@ -60,6 +68,7 @@ void Engine_Interaction::initialize() {
 
 void Engine_Interaction::update(World_Data *data) {
 
+    //Pour le moment l'objet tourne yay!
     QCursor e = this->world_->getWindow()->cursor();
     int width = this->world_->getWindow()->width();
     int height = this->world_->getWindow()->height();
@@ -68,6 +77,7 @@ void Engine_Interaction::update(World_Data *data) {
 
     float diffX = (e.pos().rx() - width/2 - x) * 0.001;
     float diffY = (e.pos().ry() - height/2 - y) * 0.001;
+
 
     //data->getCamera()->rotateAroundUp(diffX);
     //data->getCamera()->rotateAroundRight(diffY);

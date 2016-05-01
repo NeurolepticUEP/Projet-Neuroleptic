@@ -1,7 +1,7 @@
 #include "camera.h"
 
 Camera::Camera(Camera_Mode mode, glm::vec3 position, glm::vec3 direction,
-               float fov, float heigth, float width) {
+               float fov, float width, float heigth) {
     this->mode_ = mode;
 
     this->projection_ = glm::perspective(fov, width/heigth, 0.1f, 100.0f);

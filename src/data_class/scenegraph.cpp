@@ -6,6 +6,7 @@
 #include "instance_vector.h"
 
 #include "../data_maker.h"
+#include "../objloading.h"
 
 SceneGraph::SceneGraph() {
     this->mesh_graph_ = new MeshGraph();
@@ -32,6 +33,12 @@ bool SceneGraph::addInstance(Instance *i, std::string mesh_id) {
 
     i_vec->addInstance(i);
     return true;
+}
+
+void SceneGraph::loadFile(std::string file) {
+    Mesh *mesh = loadObjFile(file.c_str());
+
+    (*this->mesh_graph_)[mesh] = new Instance_Vector(mesh->getNbIndices());
 }
 
 void SceneGraph::loadCubeData() {

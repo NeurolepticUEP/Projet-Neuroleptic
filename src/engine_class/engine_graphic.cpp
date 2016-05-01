@@ -10,7 +10,7 @@ Engine_Graphic::Engine_Graphic(World *world)
 }
 
 Engine_Graphic::~Engine_Graphic() {
-
+    delete this->render_;
 }
 
 void Engine_Graphic::initialize() {

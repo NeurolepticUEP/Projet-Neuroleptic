@@ -10,6 +10,7 @@
 class World {
 public:
     World(QWidget* window);
+    ~World();
 
     void initialize();
     void update();

@@ -1,0 +1,16 @@
+INPUT(
+./debug\main.o
+./debug\window.o
+./debug\sintracker.o
+./debug\data_maker.o
+./debug\engine_graphic.o
+./debug\engine_interaction.o
+./debug\rendernode.o
+./debug\scenegraph.o
+./debug\world.o
+./debug\camera.o
+./debug\mesh.o
+./debug\shader.o
+./debug\objloading.o
+./debug\moc_window.o
+);

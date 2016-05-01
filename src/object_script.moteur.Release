@@ -1,0 +1,16 @@
+INPUT(
+./release\main.o
+./release\window.o
+./release\sintracker.o
+./release\data_maker.o
+./release\engine_graphic.o
+./release\engine_interaction.o
+./release\rendernode.o
+./release\scenegraph.o
+./release\world.o
+./release\camera.o
+./release\mesh.o
+./release\shader.o
+./release\objloading.o
+./release\moc_window.o
+);

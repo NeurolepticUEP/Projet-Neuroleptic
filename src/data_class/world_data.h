@@ -10,7 +10,11 @@
 
 class World_Data {
 public:
-    World_Data(Camera *camera, SceneGraph *scene): camera_(camera), scene_(scene) {  }
+    World_Data(Camera *camera, SceneGraph *scene): camera_(camera), scene_(scene) {
+        for(int i = 0; i < 24; ++i) {
+            this->body_part_[i] = nullptr;
+        }
+    }
     ~World_Data() {
         delete this->camera_;
         delete this->scene_;

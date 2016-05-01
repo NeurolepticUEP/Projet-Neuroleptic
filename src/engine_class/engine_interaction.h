@@ -14,7 +14,7 @@ class Window;
 class Engine_Interaction : public Engine_Abstract {
 public:
     Engine_Interaction(World* world);
-    ~Engine_Interaction();
+    virtual ~Engine_Interaction();
 
     void keyboardEventHandler(QKeyEvent *e);
 

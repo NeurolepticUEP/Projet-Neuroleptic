@@ -16,6 +16,8 @@ public:
     bool addInstance(Instance *i, std::string mesh_id);
     void draw(Shader &shader);
 
+    void loadFile(std::string file);
+
 private:
     void loadCubeData();
 

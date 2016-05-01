@@ -14,7 +14,7 @@ RenderNode::~RenderNode() {
 }
 
 void RenderNode::draw(Camera *camera, SceneGraph *scene) {
-    glm::vec3 lightPosition = glm::vec3(3.0f, 3.0f, 3.0f);
+    glm::vec3 lightPosition = glm::vec3(0.0f, 0.0f, 5.0f);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

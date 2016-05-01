@@ -13,7 +13,6 @@ TEMPLATE = app
 
 SOURCES += src/main.cpp\
     src/window.cpp \
-    src/sintracker.cpp \
     src/data_maker.cpp \
     src/engine_class/engine_graphic.cpp \
     src/engine_class/engine_interaction.cpp \
@@ -22,7 +21,8 @@ SOURCES += src/main.cpp\
     src/engine_class/world.cpp \
     src/data_class/graphic/camera.cpp \
     src/data_class/graphic/mesh.cpp \
-    src/data_class/graphic/shader.cpp
+    src/data_class/graphic/shader.cpp \
+    src/objloading.cpp
 
 HEADERS  += \
     src/gl_include.h \
@@ -43,13 +43,14 @@ HEADERS  += \
     src/data_class/state.h \
     src/data_class/instance_vector.h \
     src/data_class/graphic/bindable.h \
-    src/data_class/graphic/drawable.h
+    src/data_class/graphic/drawable.h \
+    src/objloading.h
 
 FORMS    +=
 
 
 INCLUDEPATH += $${PWD}/lib/VRPN/src
-LIBS += -L$${PWD}/lib/VRPN/ -lopengl32 -lvrpn -lws2_32
+LIBS += -L$${PWD}/lib/VRPN/ -lvrpn -lvrpnserver -lws2_32
 
 
 QMAKE_CXXFLAGS += -std=c++11

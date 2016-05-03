@@ -19,6 +19,8 @@
 #include "lib/glm/gtc/matrix_transform.hpp"
 #include "lib/glm/gtc/type_ptr.hpp"
 
-
+/**************************************************************************************
+* Auteur: ROVES Matthias                                                              *
+***************************************************************************************/
 
 #endif // GL_INCLUDE_H

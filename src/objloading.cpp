@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include <vector>
 
 #include "objloading.h"
 
@@ -36,13 +35,13 @@ Mesh *loadObjFile(const char* file_name)
             vertices_num = 0,   //  Nombre de vertices
             normals_num = 0;    //  Nombre de normales
 
-    bool 	library_exists = false;
+    bool    library_exists = false;
 
     Mtl *materials;
 
 
     /*
-     *  Récupération du nom du fichier .mtl
+     *  Fichier .obj
      */
     std::ifstream obj_file(obj_name.c_str());
 
@@ -52,32 +51,39 @@ Mesh *loadObjFile(const char* file_name)
         exit(1);
     }
 
-    while(obj_file)
+    //  On ne tient pas compte des éventuels commentaires en début de fichier
+    do
     {
-        obj_file >> word;
+        std::getline(obj_file, line);
+    }
+    while(line[0] == '#');
 
-        //  Vertex
-        if(!std::strcmp(word.c_str(), "v"))
-            ++vertices_num;
-
-        //  Normale
-        if(!std::strcmp(word.c_str(), "vn"))
-            ++normals_num;
-
-        //  Indice
-        if(!std::strcmp(word.c_str(), "f"))
-            index_num += 3;
-
-        //	.mtl présent
+    //  Récupération du nom du fichier .mtl
+    std::istringstream iss(line);
+    if(iss >> word >> mtl_name)
+    {
+        //  .mtl présent
         if(!std::strcmp(word.c_str(), "mtllib"))
-        {
-            obj_file >> mtl_name;
             library_exists = true;
+    }
+
+    //  Comptage des vertices, normales et faces
+    while(std::getline(obj_file, line))
+    {
+        if(line[0] == 'v')  //  Vertex
+        {
+            if(line[1] == ' ')
+                ++vertices_num;
+            else if(line[1] == 'n') //  Normale
+                ++normals_num;
         }
+        else if(line[0] == 'f') //  Face
+            index_num += 3;
     }
     obj_file.close();
-    if(!library_exists)
+    if(!library_exists) //  Si pas de .mtl
     {
+        //  Allocation tableau de matériaux
         materials = new Mtl[1];
         //  Matériau par défaut
         Mtl m;
@@ -91,7 +97,7 @@ Mesh *loadObjFile(const char* file_name)
     else
     {
         /*
-         *  Si mtl, ecture du fichier et récupération des couleurs
+         *  Lecture du .mtl
          */
         std::ifstream mtl_file(mtl_name.c_str());
 
@@ -105,7 +111,7 @@ Mesh *loadObjFile(const char* file_name)
         {
             mtl_file >> word;
 
-            //	Nouveau matériau
+            //  Nouveau matériau
             if(!std::strcmp(word.c_str(), "newmtl"))
             {
                 std::string mat_name;
@@ -116,7 +122,7 @@ Mesh *loadObjFile(const char* file_name)
                 materials[++index_mat] = m;
             }
 
-            //	Récupération de la couleur diffuse
+            //  Récupération de la couleur diffuse
             else if(!std::strcmp(word.c_str(), "Kd"))
             {
                 float component;
@@ -148,7 +154,7 @@ Mesh *loadObjFile(const char* file_name)
             *normals = new vec3[normals_num],
             *tab_normals = new vec3[vertices_num],
             *colors = new vec3[vertices_num];
-    GLuint  *indices = new GLuint[index_num];
+    unsigned int  *indices = new unsigned int[index_num];
 
     /*
      *  Indices associés
@@ -174,7 +180,7 @@ Mesh *loadObjFile(const char* file_name)
 
         if(iss >> word >> X >> Y >> Z)
         {
-            //	Vertex
+            //  Vertex
             if(!strcmp(word.c_str(), "v"))
             {
                 vec3 vertex;
@@ -183,7 +189,7 @@ Mesh *loadObjFile(const char* file_name)
                 vertex.z = Z;
                 vertices[index_vertices++] = vertex;
             }
-            //	Normale
+            //  Normale
             else if(!strcmp(word.c_str(), "vn"))
             {
                 vec3 normal;
@@ -195,7 +201,7 @@ Mesh *loadObjFile(const char* file_name)
         }
         else
         {
-            //	On recommence sur les faces
+            //  On recommence sur les faces
             iss.clear();
             iss.str(line);
             if(iss >> word >> face1 >> face2 >> face3)
@@ -203,13 +209,13 @@ Mesh *loadObjFile(const char* file_name)
                 //  Si ce n'est pas un commentaire
                 if(strcmp(word.c_str(), "#"))
                 {
-                    //	Indice
-                    GLuint index = atoi(face1.substr(0, face1.find("/")).c_str()) - 1;//Coordonnées de vertex
+                    //  Indices + Normales
+                    unsigned int index = atoi(face1.substr(0, face1.find("/")).c_str()) - 1;//Coordonnées de vertex
                     indices[index_indices++] = index;
                     colors[index] = materials[current_mat].diffuse;
                     face1 = face1.substr(face1.find("/") + 1);//Coordonnées de texture
                     face1 = face1.substr(face1.find("/") + 1);//Normale
-                    GLuint index_normal = atoi(face1.c_str()) - 1;
+                    unsigned int index_normal = atoi(face1.c_str()) - 1;
                     tab_normals[index] = normals[index_normal];
 
                     index = atoi(face2.substr(0, face2.find("/")).c_str()) - 1;//Coordonnées de vertex
@@ -235,7 +241,7 @@ Mesh *loadObjFile(const char* file_name)
                 iss.str(line);
                 if(iss >> word >> mtl_name)
                 {
-                    //	Utilisation d'un matériau
+                    //  Utilisation d'un matériau
                     if(!strcmp(word.c_str(), "usemtl"))
                     {
                         for(current_mat = 0; current_mat < material_num; ++current_mat)
@@ -250,23 +256,23 @@ Mesh *loadObjFile(const char* file_name)
     }
     obj_file.close();
 
-    //	Tableaux de sortie
-    GLfloat out_vertices[vertices_num * 9];
+    //  Tableaux de sortie
+    float out_vertices[vertices_num * 9];
 
-    //	Remplissage du tableau des données
-    for(GLuint i = 0, j = 0; i < vertices_num * 9; i += 9, ++j)
+    //  Remplissage du tableau des données
+    for(unsigned int i = 0, j = 0; i < vertices_num * 9; i += 9, ++j)
     {
-        //	Vertex
+        //  Vertex
         out_vertices[i] = vertices[j].x;
         out_vertices[i + 1] = vertices[j].y;
         out_vertices[i + 2] = vertices[j].z;
 
-        //	Normale
+        //  Normale
         out_vertices[i + 3] = tab_normals[j].x;
         out_vertices[i + 4] = tab_normals[j].y;
         out_vertices[i + 5] = tab_normals[j].z;
 
-        //	Couleur diffuse
+        //  Couleur diffuse
         out_vertices[i + 6] = colors[j].x;
         out_vertices[i + 7] = colors[j].y;
         out_vertices[i + 8] = colors[j].z;

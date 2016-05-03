@@ -1,7 +1,7 @@
 #include "mesh.h"
 
-Mesh::Mesh(std::string &id, GLuint vao, GLuint vbo):
-    Bindable(id), vao_(vao), vbo_(vbo) {
+Mesh::Mesh(std::string &id, GLuint vao, GLuint vbo, GLuint ebo):
+    Bindable(id), vao_(vao), vbo_(vbo), ebo_(ebo) {
 
     this->initializeOpenGLFunctions();
 }

@@ -9,6 +9,11 @@
 #include "instance_vector.h"
 
 
+/***************************************************************************************
+ * Classe representant une interaction basique dans le graphe de scene                 *
+ * Ainsi, ce dernier regroupe un ensemble d'objet devant etre lié a un ensemble d'objet*
+ * a affiché                                                                           *
+ *------------------------------------------------------------------------------------*/
 template<typename Key = Bindable*, typename Element = Drawable*>
 class Abstract_State : public std::map<Key, Element>, Drawable {
 public:
@@ -19,6 +24,7 @@ public:
         }
     }
 
+    //Fonction permettant de retrouver un des fils a partir de son identifiant
     virtual Element findById(std::string id) {
         typename Abstract_State::iterator it = this->begin();
 
@@ -29,6 +35,7 @@ public:
         return (it != this->end())? it->second : nullptr;
     }
 
+    //Fonction dessinant le micro-grpahe
     virtual void draw(Shader &shader) {
         for(typename Abstract_State::iterator it = this->begin(); it != this->end(); ++it) {
             it->first->bind(shader);
@@ -36,9 +43,11 @@ public:
         }
     }
 };
+/**************************************************************************************
+* Auteur: ROVES Matthias                                                              *
+***************************************************************************************/
 
-class MeshGraph : public Abstract_State<Mesh*, Instance_Vector*> {  };
-
+typedef Abstract_State<Mesh*, Instance_Vector*> MeshGraph;
 
 #endif // STATE_H
 

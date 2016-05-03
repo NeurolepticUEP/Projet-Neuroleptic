@@ -11,7 +11,7 @@ Window::Window() {
     glFormat.setSampleBuffers(true);
     this->setFormat(glFormat);
 
-    this->resize(800, 600);
+    this->resize(1920, 1080);
 
     this->timer_ = new QTimer(this);
     this->connect(this->timer_, SIGNAL(timeout()), this, SLOT(update()));
@@ -30,13 +30,14 @@ void Window::initializeGL() {
     this->world_->initialize();
 }
 
-void Window::resizeGL(int w, int h) {
+void Window::resizeGL(int, int) {
+
 }
 
 void Window::paintGL() {
     this->world_->update();
 }
 
-void Window::keyPressEvent(QKeyEvent *e) {
+void Window::keyPressEvent(QKeyEvent*) {
 }
 

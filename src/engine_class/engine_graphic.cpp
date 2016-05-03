@@ -10,7 +10,7 @@ Engine_Graphic::Engine_Graphic(World *world)
 }
 
 Engine_Graphic::~Engine_Graphic() {
-    delete this->render_;
+
 }
 
 void Engine_Graphic::initialize() {
@@ -27,8 +27,8 @@ void Engine_Graphic::initialize() {
     this->render_ = new RenderNode();
 }
 
-void  Engine_Graphic::resize(int width, int height) {
-    glViewport(0, 0, width, height);
+void  Engine_Graphic::resize() {
+    glViewport(0, 0, this->world_->getWindow()->width(), this->world_->getWindow()->height());
 }
 
 void Engine_Graphic::update(World_Data *data) {

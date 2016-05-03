@@ -133,12 +133,12 @@ void Shader::setUniformLocation(const char *name, glm::vec4 &value) {
     glUniform4fv(glGetUniformLocation(this->program_, name), 1,  glm::value_ptr(value));
 }
 
-void Shader::setUniformLocationT(const char* name, int texUnit){
-    glUniform1i(glGetUniformLocation(this->program_, name), texUnit);
-}
-
 void Shader::setUniformLocationM(const char* name, glm::mat4 &mat){
     glUniformMatrix4fv(glGetUniformLocation(this->program_, name), 1, GL_FALSE, glm::value_ptr(mat));
+}
+
+void Shader::setUniformLocationM(const char* name, glm::mat3 &mat){
+    glUniformMatrix3fv(glGetUniformLocation(this->program_, name), 1, GL_FALSE, glm::value_ptr(mat));
 }
 
 void Shader::bind() {

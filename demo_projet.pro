@@ -13,6 +13,7 @@ TEMPLATE = app
 
 SOURCES += src/main.cpp\
     src/window.cpp \
+    src/sintracker.cpp \
     src/data_maker.cpp \
     src/engine_class/engine_graphic.cpp \
     src/engine_class/engine_interaction.cpp \
@@ -28,7 +29,6 @@ HEADERS  += \
     src/gl_include.h \
     src/window.h \
     src/data_maker.h \
-    src/sintracker.h \
     src/engine_class/engine_abstract.h \
     src/engine_class/engine_graphic.h \
     src/engine_class/engine_interaction.h \

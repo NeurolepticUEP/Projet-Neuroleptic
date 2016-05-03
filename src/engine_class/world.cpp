@@ -16,7 +16,7 @@ World::World(QWidget *window): window_(window) {
     this->engines_.push_back(new Engine_Graphic(this));
 }
 
-World::~World() {
+World::~World(){
     for(unsigned int i = 0; i < this->engines_.size(); ++i) {
         delete this->engines_[i];
     }
@@ -35,23 +35,24 @@ void World::initialize() {
 
 
     SceneGraph *scene = new SceneGraph();
-    glm::mat4 mat(0.5f);
-    std::string name_pok1("mesh_POK1"), name_pok2("mesh_POK2"), mesh_pok("POK");
+    glm::mat4 mat(1.0f);
+    std::string name_pok("mesh_pok"), name_pik("mesh_pik");
+    std::string mesh_pok("PIKTRIHD"), mesh_pik("POKTRIHD");
 
-    mat = glm::translate(mat, glm::vec3(1.0, 0.0, 0.0));
-    Instance *inst_pok1 = new Instance(name_pok1, mat);
 
-    mat = glm::translate(mat, glm::vec3(-2.0, 0.0, 0.0));
-    Instance *inst_pok2 = new Instance(name_pok2, mat);
+    mat = glm::scale(mat, glm::vec3(0.5, 0.5, 0.5));
+    Instance *inst_pok = new Instance(name_pok, mat);
+    Instance *inst_pik = new Instance(name_pik, mat);
 
-    scene->loadFile("POK.obj");
-    scene->addInstance(inst_pok1, mesh_pok);
-    scene->addInstance(inst_pok2, mesh_pok);
+    scene->loadFile("POKTRIHD.obj");
+    scene->loadFile("PIKTRIHD.obj");
+    scene->addInstance(inst_pok, mesh_pok);
+    scene->addInstance(inst_pik, mesh_pik);
 
     this->data_ = new World_Data(camera, scene);
 
-    this->data_->addBodyPart(inst_pok1, 8);
-    this->data_->addBodyPart(inst_pok2, 14);
+    this->data_->addBodyPart(inst_pok, 8);
+    this->data_->addBodyPart(inst_pik, 14);
 }
 
 void World::update() {

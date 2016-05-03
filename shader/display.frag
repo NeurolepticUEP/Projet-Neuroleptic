@@ -7,6 +7,8 @@ in vec3 color_vertex;
 in vec4 normal_vertex;
 
 uniform vec3 light_position;
+uniform vec3 light_color;
+
 uniform vec3 camera_position;
 
 vec3 getColor() {
@@ -21,5 +23,5 @@ void main() {
     float spec = pow(max(dot(view_direction, reflect_direction), 0.0), 8);
     float diff = max(dot(normal_vertex.xyz, light_direction), 0.0);
 
-    color = vec4((0.2 + spec + diff) * getColor(), 1.0);;
+    color = vec4((0.2 + spec + diff) * getColor() * light_color, 1.0);
 }
